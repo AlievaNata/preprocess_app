@@ -1,0 +1,25 @@
+- hosts: cluster
+  become: yes
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Create app directory
+      file:
+        path: /opt/preprocess_app
+        state: directory
+
+    - name: Copy docker-compose.yml
+      copy:
+        src: ./docker-compose.yml
+        dest: /opt/preprocess_app/docker-compose.yml
+
+    - name: Start service
+      command: docker compose up -d
+      args:
+        chdir: /opt/preprocess_app
+

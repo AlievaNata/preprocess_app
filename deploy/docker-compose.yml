@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  preprocess_app:
+    image: "ghcr.io/alievanata/preprocess_app:staging"
+    ports:
+      - "8001:8000"
+
